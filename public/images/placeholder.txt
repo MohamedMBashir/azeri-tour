@@ -1,0 +1,20 @@
+Please add the following images to this directory:
+
+1. hagia-sophia.jpg
+2. topkapi-palace.jpg
+3. grand-bazaar.jpg
+4. cappadocia-balloon.jpg
+5. underground-city.jpg
+6. red-valley.jpg
+7. antalya-old-town.jpg
+8. duden-falls.jpg
+9. aspendos.jpg
+10. four-seasons-bosphorus.jpg
+11. pera-palace.jpg
+12. museum-hotel.jpg
+13. argos-cappadocia.jpg
+14. tuvana-hotel.jpg
+15. akra-hotel.jpg
+
+These images should be high-quality, properly sized (recommended: 800x600px), and optimized for web use.
+Until the actual images are added, the application will show placeholder images or fallback to a default image. 

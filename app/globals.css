@@ -3,19 +3,504 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-blue: #4a90e2;
+  --light-blue: #f0f6ff;
+  --lighter-blue: #e6f0ff;
+  --dark-blue: #2c5282;
+  --grey-100: #f7fafc;
+  --grey-200: #edf2f7;
+  --grey-300: #e2e8f0;
+  --grey-400: #cbd5e0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, sans-serif;
+  line-height: 1.6;
+  background-color: var(--grey-100);
+}
+
+.container {
+  display: block;
+  min-height: 100vh;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  min-width: 1800px;
+}
+
+.package-builder {
+  margin-left: 500px;
+  padding: 3rem;
+  background-color: white;
+  max-width: 1400px;
+}
+
+.tour-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 2rem;
+  border-right: 1px solid var(--grey-300);
+  background-color: white;
+}
+
+.tour-list h2 {
+  color: var(--dark-blue);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  padding-left: 0.8rem;
+}
+
+.city-header {
+  color: var(--dark-blue);
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 4px solid var(--primary-blue);
+  line-height: 1;
+}
+
+.tour-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background-color: white;
+  border: 1px solid var(--grey-300);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tour-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
+  border-color: var(--primary-blue);
+  background-color: var(--grey-100);
+}
+
+.tour-item span {
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.add-tour-btn {
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-blue);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.add-tour-btn:hover {
+  background-color: var(--dark-blue);
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+.tour-cards {
+  min-width: 1200px;
+  margin: 0 auto;
+}
+
+.tour-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.tour-card:hover {
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+}
+
+.card-header {
+  background-color: var(--primary-blue);
+  background-image: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+  padding: 1.5rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.card-content {
+  display: flex;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+
+.tour-itinerary {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+.card-image {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card-image:hover img {
+  transform: scale(1.05);
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  margin-left: auto;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+  opacity: 1;
+  color: #ff4757;
+}
+
+.dates-section {
+  margin: 20px 0 20px 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  width: calc(100% - 40px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 50px;
+}
+
+.dates-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-row {
+  display: grid;
+  grid-template-columns: 100px 150px;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.date-row label {
+  font-weight: 600;
+  color: var(--dark-blue);
+  font-size: 1.1rem;
+}
+
+.date-row input {
+  padding: 8px 12px;
+  padding-right: 35px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 150px;
+  font-size: 1rem;
+  height: 38px;
+}
+
+.duration-display {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 10px;
+}
+
+.travelers-input {
+  margin: 0 0 20px 20px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: calc(100% - 40px);
+}
+
+.travelers-count {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 15px;
+}
+
+.traveler-field {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.traveler-field label {
+  font-weight: 600;
+  color: var(--dark-blue);
+  font-size: 1.1rem;
+  min-width: 80px;
+}
+
+.number-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.number-input button {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--dark-blue);
+  background: white;
+  color: var(--dark-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.number-input button:hover {
+  background: var(--dark-blue);
+  color: white;
+}
+
+.number-input input {
+  width: 50px;
+  padding: 8px;
+  text-align: center;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+.child-ages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+.child-age-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.child-age-field label {
+  font-weight: 500;
+  color: var(--dark-blue);
+}
+
+.child-age-field input {
+  width: 60px;
+  padding: 8px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.notes-area {
+  width: 800px;
+  min-height: 100px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid var(--grey-300);
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  color: #2c3e50;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.notes-area:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.button-container {
+  width: 1200px;
+  margin: 0 auto;
+  text-align: right;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.next-day-btn,
+.generate-pdf-btn {
+  background: var(--primary-blue);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+.next-day-btn:hover,
+.generate-pdf-btn:hover {
+  background: var(--dark-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.reset-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.agency-logo-section {
+  margin: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-preview-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#logoPreview {
+  max-width: 100px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.upload-logo-btn {
+  padding: 8px 15px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.upload-logo-btn:hover {
+  background-color: var(--dark-blue);
+}
+
+.remove-logo-btn {
+  padding: 8px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.remove-logo-btn:hover {
+  background-color: #c82333;
+}
+
+/* React DatePicker Customization */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--grey-300);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+@media screen and (min-width: 1600px) {
+  .container {
+    min-width: 1600px;
+  }
+  
+  .tour-list {
+    width: 600px;
+  }
+  
+  .package-builder {
+    margin-left: 600px;
+    width: calc(100% - 600px);
+  }
 }
