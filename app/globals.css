@@ -11,6 +11,13 @@
   --grey-200: #edf2f7;
   --grey-300: #e2e8f0;
   --grey-400: #cbd5e0;
+  --transition: all 0.3s ease;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
 * {
@@ -19,84 +26,127 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
-  font-family: Inter, sans-serif;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   background-color: var(--grey-100);
+  color: #2c3e50;
+  overflow-x: hidden;
 }
 
 .container {
-  display: block;
+  display: flex;
   min-height: 100vh;
   background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  min-width: 1800px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .package-builder {
-  margin-left: 500px;
-  padding: 3rem;
+  width: 100%;
+  padding: 1rem;
   background-color: white;
-  max-width: 1400px;
+  transition: var(--transition);
+  overflow-x: hidden;
 }
 
 .tour-list {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  border-right: 1px solid var(--grey-300);
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
-  width: 500px;
-  height: 100vh;
-  overflow-y: auto;
-  padding: 2rem;
-  border-right: 1px solid var(--grey-300);
-  background-color: white;
+  transform: translateX(-100%);
+  transition: var(--transition);
+  z-index: 50;
+  max-width: 100vw;
+}
+
+.tour-list.active {
+  transform: translateX(0);
+}
+
+.toggle-sidebar {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 60;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 1.25rem;
+}
+
+.toggle-sidebar:hover {
+  background: var(--dark-blue);
 }
 
 .tour-list h2 {
   color: var(--dark-blue);
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
-  padding-left: 0.8rem;
+  padding-left: 0.5rem;
 }
 
 .city-header {
   color: var(--dark-blue);
-  font-size: 24px;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  padding-left: 15px;
-  border-left: 4px solid var(--primary-blue);
-  line-height: 1;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--primary-blue);
+  line-height: 1.2;
 }
 
 .tour-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
   background-color: white;
   border: 1px solid var(--grey-300);
-  transition: all 0.3s ease;
+  transition: var(--transition);
   cursor: pointer;
 }
 
 .tour-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
+  box-shadow: var(--shadow-md);
   border-color: var(--primary-blue);
   background-color: var(--grey-100);
 }
 
 .tour-item span {
-  font-size: 15px;
+  font-size: 0.9rem;
   color: #2c3e50;
   font-weight: 500;
   line-height: 1.4;
-  transition: color 0.3s ease;
+  flex: 1;
+  margin-right: 1rem;
 }
 
 .add-tour-btn {
@@ -104,7 +154,7 @@ body {
   height: 24px;
   padding: 0;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   background-color: var(--primary-blue);
   color: white;
   font-size: 1rem;
@@ -112,39 +162,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   flex-shrink: 0;
 }
 
 .add-tour-btn:hover {
   background-color: var(--dark-blue);
   transform: scale(1.1);
-  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
 }
 
 .tour-cards {
-  min-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0;
 }
 
 .tour-card {
   background-color: white;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
   margin-bottom: 1.5rem;
   width: 100%;
 }
 
 .tour-card:hover {
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .card-header {
-  background-color: var(--primary-blue);
   background-image: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -152,28 +201,32 @@ body {
 }
 
 .card-header h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 0;
+  line-height: 1.4;
 }
 
 .card-content {
   display: flex;
-  padding: 1.5rem;
-  gap: 2rem;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .tour-itinerary {
   flex: 1;
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #2c3e50;
+}
+
+.tour-itinerary p {
+  margin-bottom: 0.75rem;
 }
 
 .card-image {
-  width: 200px;
+  width: 100%;
   height: 200px;
-  flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
@@ -184,10 +237,6 @@ body {
   transition: transform 0.3s ease;
 }
 
-.card-image:hover img {
-  transform: scale(1.05);
-}
-
 .remove-btn {
   background: none;
   border: none;
@@ -195,9 +244,8 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0 0.5rem;
-  margin-left: auto;
   opacity: 0.8;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .remove-btn:hover {
@@ -206,106 +254,104 @@ body {
 }
 
 .dates-section {
-  margin: 20px 0 20px 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  width: calc(100% - 40px);
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--grey-100);
+  border-radius: var(--radius-md);
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 50px;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .dates-inputs {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .date-row {
   display: grid;
-  grid-template-columns: 100px 150px;
+  grid-template-columns: 100px 1fr;
   align-items: center;
-  gap: 10px;
-  position: relative;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .date-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .date-row label {
   font-weight: 600;
   color: var(--dark-blue);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
 .date-row input {
-  padding: 8px 12px;
-  padding-right: 35px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--grey-300);
+  border-radius: var(--radius-sm);
   font-family: inherit;
-  width: 150px;
-  font-size: 1rem;
-  height: 38px;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 200px;
 }
 
 .duration-display {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 5px;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 600;
-  color: #2c3e50;
-  margin-top: 10px;
+  color: var(--dark-blue);
 }
 
 .travelers-input {
-  margin: 0 0 20px 20px;
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  width: calc(100% - 40px);
+  margin: 1rem 0;
+  background: var(--grey-100);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  width: 100%;
 }
 
 .travelers-count {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .traveler-field {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .traveler-field label {
   font-weight: 600;
   color: var(--dark-blue);
-  font-size: 1.1rem;
-  min-width: 80px;
+  font-size: 0.9rem;
 }
 
 .number-input {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.75rem;
+  max-width: 150px;
 }
 
 .number-input button {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: 2px solid var(--dark-blue);
   background: white;
   color: var(--dark-blue);
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .number-input button:hover {
@@ -315,53 +361,54 @@ body {
 
 .number-input input {
   width: 50px;
-  padding: 8px;
+  padding: 0.5rem;
   text-align: center;
-  border: 2px solid #e9ecef;
-  border-radius: 6px;
-  font-size: 1.1rem;
+  border: 1px solid var(--grey-300);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
 }
 
 .child-ages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #e9ecef;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--grey-300);
 }
 
 .child-age-field {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .child-age-field label {
   font-weight: 500;
   color: var(--dark-blue);
+  font-size: 0.85rem;
 }
 
 .child-age-field input {
-  width: 60px;
-  padding: 8px;
-  border: 2px solid #e9ecef;
-  border-radius: 6px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--grey-300);
+  border-radius: var(--radius-sm);
   text-align: center;
+  font-size: 0.9rem;
 }
 
 .notes-area {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   min-height: 100px;
-  margin: 20px auto;
-  padding: 15px;
+  margin: 1.5rem auto;
+  padding: 1rem;
   border: 1px solid var(--grey-300);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   resize: vertical;
   font-family: inherit;
-  font-size: 14px;
-  color: #2c3e50;
-  background-color: white;
-  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  transition: var(--transition);
 }
 
 .notes-area:focus {
@@ -371,83 +418,78 @@ body {
 }
 
 .button-container {
-  width: 1200px;
-  margin: 0 auto;
-  text-align: right;
-  padding: 1.5rem 0;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
 }
 
-.next-day-btn,
 .generate-pdf-btn {
   background: var(--primary-blue);
   color: white;
-  padding: 12px 28px;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.3px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
-.next-day-btn:hover,
 .generate-pdf-btn:hover {
   background: var(--dark-blue);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
-}
-
-.reset-btn {
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.reset-btn:hover {
-  background-color: #c82333;
-  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
 .agency-logo-section {
-  margin: 15px 20px;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
 }
 
 .logo-preview-container {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 3/2;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  background: var(--grey-100);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
 
 #logoPreview {
-  max-width: 100px;
-  max-height: 50px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
-.upload-logo-btn {
-  padding: 8px 15px;
-  background-color: var(--primary-blue);
-  color: white;
+.upload-logo-btn,
+.remove-logo-btn {
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 14px;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.upload-logo-btn {
+  background-color: var(--primary-blue);
+  color: white;
 }
 
 .upload-logo-btn:hover {
@@ -455,16 +497,8 @@ body {
 }
 
 .remove-logo-btn {
-  padding: 8px 15px;
   background-color: #dc3545;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 14px;
 }
 
 .remove-logo-btn:hover {
@@ -474,14 +508,15 @@ body {
 /* React DatePicker Customization */
 .react-datepicker-wrapper {
   width: 100%;
+  max-width: 200px;
 }
 
 .react-datepicker__input-container input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
   border: 1px solid var(--grey-300);
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
 }
 
 .react-datepicker__input-container input:focus {
@@ -490,17 +525,87 @@ body {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
-@media screen and (min-width: 1600px) {
-  .container {
-    min-width: 1600px;
-  }
-  
-  .tour-list {
-    width: 600px;
-  }
-  
+/* Responsive Design */
+@media screen and (min-width: 640px) {
   .package-builder {
-    margin-left: 600px;
-    width: calc(100% - 600px);
+    padding: 1.5rem;
+  }
+
+  .travelers-count {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agency-logo-section {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .package-builder {
+    padding: 2rem;
+  }
+
+  .card-content {
+    flex-direction: row;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .card-image {
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  .button-container {
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+  }
+
+  .tour-list {
+    position: sticky;
+    top: 0;
+    width: 300px;
+    transform: none;
+    grid-column: 1;
+  }
+
+  .package-builder {
+    grid-column: 2;
+    padding: 2rem;
+    margin-left: 0;
+  }
+
+  .toggle-sidebar {
+    display: none;
+  }
+
+  .dates-section {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    grid-template-columns: 350px 1fr;
+  }
+
+  .tour-list {
+    width: 350px;
+  }
+
+  .package-builder {
+    max-width: calc(100vw - 350px);
+  }
+
+  .tour-cards {
+    max-width: 1000px;
   }
 }
